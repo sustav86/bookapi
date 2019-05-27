@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.sustav</groupId>
     <artifactId>bookapi</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>bookapi</name>
     <url>http://maven.apache.org</url>
@@ -35,6 +35,11 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.tomcat.maven</groupId>-->
+                <!--<artifactId>tomcat8-maven-plugin</artifactId>-->
+                <!--<version>3.0-r1756463</version>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 
@@ -74,11 +79,11 @@
             <version>6.0.0.Alpha2</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-c3p0 -->
-        <dependency>
-            <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-c3p0</artifactId>
-            <version>6.0.0.Alpha2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate.orm</groupId>-->
+            <!--<artifactId>hibernate-c3p0</artifactId>-->
+            <!--<version>6.0.0.Alpha2</version>-->
+        <!--</dependency>-->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
@@ -140,6 +145,19 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-1.2-api</artifactId>
             <version>2.11.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.1</version>
         </dependency>
 
     </dependencies>

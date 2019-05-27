@@ -1,5 +1,6 @@
 package com.sustav.spring.config;
 
+import com.mchange.v2.c3p0.DriverManagerDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -7,13 +8,15 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+
 import static org.hibernate.cfg.AvailableSettings.*;
 import static org.hibernate.cfg.Environment.DRIVER;
 import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
-@PropertySource(value = "db.properties")
+@PropertySource(value = "classpath:db.properties")
 @EnableTransactionManagement
 @ComponentScans(value = {
         @ComponentScan("com.sustav.spring.dao"),
@@ -45,6 +48,7 @@ public class AppConfig {
         properties.put(C3P0_MAX_STATEMENTS, Objects.requireNonNull(environment.getProperty("hibernate.c3p0.max_statements")));
 
         localSessionFactoryBean.setHibernateProperties(properties);
+        localSessionFactoryBean.setDataSource(getDataSource());
         localSessionFactoryBean.setPackagesToScan("com.sustav.spring.model");
 
         return localSessionFactoryBean;
@@ -56,5 +60,16 @@ public class AppConfig {
         hibernateTransactionManager.setSessionFactory(localSessionFactoryBean().getObject());
 
         return hibernateTransactionManager;
+    }
+
+    @Bean
+    public DataSource getDataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClass(environment.getProperty("mysql.driver"));
+        dataSource.setJdbcUrl(environment.getProperty("mysql.url"));
+        dataSource.setUser(environment.getProperty("mysql.user"));
+        dataSource.setPassword(environment.getProperty("mysql.pas$w0rd"));
+
+        return dataSource;
     }
 }
