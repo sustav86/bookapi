@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BookDAO {
 
-    long save(Book book);
+    Long save(Book book);
 
     Book get(long id);
 

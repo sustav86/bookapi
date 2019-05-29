@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BookService {
 
-    long save(Book book);
+    Long save(Book book);
 
     Book get(long id);
 
