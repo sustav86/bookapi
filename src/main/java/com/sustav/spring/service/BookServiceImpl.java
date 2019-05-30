@@ -33,12 +33,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public void update(long id, Book book) {
-
+        bookDAO.update(id, book);
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
-
+        bookDAO.delete(id);
     }
 }

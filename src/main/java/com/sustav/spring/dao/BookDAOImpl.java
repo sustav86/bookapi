@@ -26,11 +26,12 @@ public class BookDAOImpl implements BookDAO {
     @Override
     public Book get(long id) {
 //        Book book = sessionFactory.getCurrentSession().createQuery("from book b where b.id = :id", Book.class).setParameter("id", id).getSingleResult();
-//        Query<Book> query = sessionFactory.getCurrentSession().createQuery("from book b where b.id = :id", Book.class);
-//        query.setParameter("id", id);
-//        Book book = query.getResultList().stream().findFirst().orElse(null);
+        Query<Book> query = sessionFactory.getCurrentSession().createQuery("from book b where b.id = :id", Book.class);
+        query.setParameter("id", id);
+        Book book = query.getResultList().stream().findFirst().orElse(null);
 
-        return sessionFactory.getCurrentSession().get(Book.class, id, LockMode.OPTIMISTIC);
+//        Book book = sessionFactory.getCurrentSession().get(Book.class, id, LockMode.OPTIMISTIC);
+        return book;
     }
 
     @Override
@@ -43,11 +44,13 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public void update(long id, Book book) {
-
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.saveOrUpdate(book);
     }
 
     @Override
     public void delete(long id) {
-
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete("id", id);
     }
 }
